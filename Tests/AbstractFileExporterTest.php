@@ -1,5 +1,5 @@
 <?php
-namespace PHProfiler\Tests;
+namespace PHProfilerTests;
 
 abstract class AbstractFileExporterTest extends AbstractExporterTest {
     protected $fixedFileName;
@@ -11,28 +11,27 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
 
     public function testExportWithFixedName() {
         $this->doExport($this->getFixedFileName());
-        self::assertEquals($this->getFixedFileName(), $this->exporter->getFilePath());
-        self::assertFileExists($this->getFixedFileName());
         $this->checkExportedFile($this->getFixedFileName());
     }
 
     public function testExportWithDefaultName() {
         $this->doExport();
-        self::assertFileExists($this->exporter->getFilePath());
-        $this->checkExportedFile($this->exporter->getFilePath());
+        $this->checkExportedFile($this->getExporter()->getFilePath());
     }
 
     public function tearDown() {
         parent::tearDown();
-        $this->removeCreatedFile($this->exporter->getFilePath());
+        $this->removeCreatedFile($this->getExporter()->getFilePath());
     }
 
     protected function doExport($filePath = null) {
         $this->createExporter();
         if (isset($filePath)) {
-            $this->exporter->setFilePath($filePath);
+            $this->getExporter()->setFilePath($filePath);
+            self::assertEquals($this->getFixedFileName(), $this->getExporter()->getFilePath());
         }
-        $this->exporter->export();
+        $this->getExporter()->export();
+        self::assertFileExists($this->getExporter()->getFilePath());
     }
 
     abstract protected function createExporter();
@@ -50,13 +49,12 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
 
     protected function checkHead($rowToCheck) {
         $headRow = $this->getLineAsArray($rowToCheck);
-        $this->checkLine($this->exporter->getHeaderRow(), $headRow);
+        $this->checkLine($this->getExporter()->getHeaderRow(), $headRow);
     }
 
     protected function checkBody($rowsToCheck) {
         foreach ($rowsToCheck as $index => $row) {
-            $rowData = $this->getLineAsArray($row);
-            $this->checkLine($this->testPoints[$index], $rowData);
+            $this->checkLine($this->getTestPoints()[$index], $this->getLineAsArray($row));
         }
     }
 

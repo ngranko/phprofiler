@@ -10,10 +10,6 @@ abstract class FileExporter extends Exporter {
         $this->filePath = $filePath;
     }
 
-    public function getFilePath() {
-        return $this->filePath;
-    }
-
     public function export() {
         $filePointer = $this->getFilePointer($this->getFinalFilePath());
 

@@ -1,12 +1,12 @@
 <?php
-namespace PHProfiler\Tests;
+namespace PHProfilerTests;
 
-use PHProfiler\Exporter\LogFileExporter;
+use PHProfilerTests\Testers\LogFileExportTester;
 
 class LogFileExporterTest extends AbstractFileExporterTest  {
     protected $fixedFileName = __DIR__ . '/../TestLogExport.log';
 
     protected function createExporter() {
-        $this->exporter = new LogFileExporter($this->testPoints);
+        $this->exporter = new LogFileExportTester($this->getTestPoints());
     }
 }

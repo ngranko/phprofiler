@@ -1,5 +1,5 @@
 <?php
-namespace PHProfiler\Tests;
+namespace PHProfilerTests;
 
 use PHProfiler\Exporter\FileExporter;
 use PHPUnit_Framework_TestCase;
@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase;
 abstract class AbstractExporterTest extends PHPUnit_Framework_TestCase {
     /** @var FileExporter */
     protected $exporter;
-    protected $testPoints = [
+    private $testPoints = [
         [
             'name' => 'test point 1',
             'time' => 0.000001,
@@ -31,4 +31,12 @@ abstract class AbstractExporterTest extends PHPUnit_Framework_TestCase {
     ];
 
     abstract protected function doExport();
+
+    protected function getExporter() {
+        return $this->exporter;
+    }
+
+    protected function getTestPoints() {
+        return $this->testPoints;
+    }
 }

@@ -7,7 +7,7 @@ use PHProfiler\Exporter\LogFileExporter;
 class PHProfiler {
     private $startTime;
     private $startMemory;
-    private $rememberedPoints;
+    protected $rememberedPoints;
 
     private function __construct($startTime, $startMemoryUsed) {
         $this->startTime = $startTime;
@@ -44,13 +44,13 @@ class PHProfiler {
         return $nameBase . $i;
     }
 
-    public function exportToFile($providedFilePath = null) {
+    public function exportToLogFile($providedFilePath = null) {
         $exporter = new LogFileExporter($this->rememberedPoints);
         $exporter->setFilePath($providedFilePath);
         $exporter->export();
     }
 
-    public function exportToCsv($providedFilePath = null) {
+    public function exportToCsvFile($providedFilePath = null) {
         $exporter = new CsvFileExporter($this->rememberedPoints);
         $exporter->setFilePath($providedFilePath);
         $exporter->export();
