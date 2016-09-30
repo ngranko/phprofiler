@@ -4,7 +4,7 @@ namespace PHProfilerTests;
 use PHProfilerTests\Testers\CsvFileExportTester;
 
 class CsvFileExporterTest extends AbstractFileExporterTest {
-    protected $fixedFileName = __DIR__ . '/../TestLogExport.csv';
+    protected $fixedFileName = __DIR__ . '/../TestCsvExport.csv';
 
     protected function createExporter() {
         $this->exporter = new CsvFileExportTester($this->getTestPoints());

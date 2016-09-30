@@ -1,21 +1,18 @@
 <?php
 namespace PHProfiler\Exporter;
 
+use PHProfiler\Point\AbstractPoint;
+
 class CsvFileExporter extends FileExporter {
     protected function getDefaultExtension() {
         return 'csv';
     }
 
-    protected function prepareBodyRow($row) {
-        return array_values($row);
+    protected function preparePoint(AbstractPoint $point) {
+        return $point->asArray();
     }
 
-    protected function prepareHeaderRow($row) {
-        unset($row['isHeader']);
-        return $row;
-    }
-
-    protected function printRow($filePointer, $row) {
-        fputcsv($filePointer, $this->prepareRow($row));
+    protected function printPoint($filePointer, $point) {
+        fputcsv($filePointer, $this->preparePoint($point));
     }
 }

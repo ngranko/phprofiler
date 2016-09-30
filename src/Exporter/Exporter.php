@@ -1,6 +1,9 @@
 <?php
 namespace PHProfiler\Exporter;
 
+use PHProfiler\Point\Header;
+use PHProfiler\Point\AbstractPoint;
+
 abstract class Exporter {
     protected $printData;
 
@@ -11,23 +14,18 @@ abstract class Exporter {
     abstract public function export();
 
     public function getHeaderRow() {
-        return [
-            'isHeader' => true,
-            'name' => 'Point Name',
-            'time' => 'Time (sec)',
-            'memory' => 'Memory Used (b)',
-        ];
+        return Header::create();
     }
 
-    protected function prepareRow($row) {
-        return isset($row['isHeader']) ? $this->prepareHeaderRow($row) : $this->prepareBodyRow($row);
-    }
-
-    protected function prepareHeaderRow($row) {
-        return sprintf("%s\t\t%s\t\t%s\n", $row['name'], $row['time'], $row['memory']);
-    }
-
-    protected function prepareBodyRow($row) {
-        return sprintf("%s\t\t%f\t\t%d\n", $row['name'], $row['time'], $row['memory']);
+    protected function preparePoint(AbstractPoint $point) {
+        return sprintf(
+            "%-28s| %-28s| %-28s| %-28s| %-28s| %-28s\n",
+            $point->getName(),
+            $point->getTimeCaptured(),
+            $point->getTimeElapsed(),
+            $point->getMemory(),
+            $point->getMemoryHuman(),
+            $point->getMemorySinceStart()
+        );
     }
 }

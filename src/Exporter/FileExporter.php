@@ -13,10 +13,10 @@ abstract class FileExporter extends Exporter {
     public function export() {
         $filePointer = $this->getFilePointer($this->getFinalFilePath());
 
-        $this->printRow($filePointer, $this->getHeaderRow());
+        $this->printPoint($filePointer, $this->getHeaderRow());
 
         foreach ($this->printData as $point) {
-            $this->printRow($filePointer, $point);
+            $this->printPoint($filePointer, $point);
         }
 
         $this->closeFilePointer($filePointer);
@@ -31,15 +31,19 @@ abstract class FileExporter extends Exporter {
     }
 
     protected function getFinalFilePath() {
-        if (is_null($this->filePath)) {
-            $this->filePath = sprintf('%s/profiler_output_%d.%s', getcwd(), time(), $this->getDefaultExtension());
+        if (!isset($this->filePath)) {
+            $this->filePath = $this->getDefaultFilePath();
         }
         return $this->filePath;
     }
 
+    protected function getDefaultFilePath() {
+        return sprintf('%s/profiler_output_%d.%s', getcwd(), time(), $this->getDefaultExtension());
+    }
+
     abstract protected function getDefaultExtension();
 
-    abstract protected function printRow($filePointer, $row);
+    abstract protected function printPoint($filePointer, $point);
 
     protected function closeFilePointer($pointer) {
         fclose($pointer);

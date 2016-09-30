@@ -3,6 +3,8 @@ namespace PHProfiler;
 
 use PHProfiler\Exporter\CsvFileExporter;
 use PHProfiler\Exporter\LogFileExporter;
+use PHProfiler\Point\AbstractPoint;
+use PHProfiler\Point\Point;
 
 class PHProfiler {
     private $startTime;
@@ -21,11 +23,7 @@ class PHProfiler {
 
     public function rememberPoint($name = null) {
         $pointName = $this->getPointName($name);
-        $this->rememberedPoints[] = [
-            'name' => $pointName,
-            'time' => microtime(true) - $this->startTime,
-            'memory' => memory_get_usage() - $this->startMemory,
-        ];
+        $this->rememberedPoints[] = Point::create($pointName, $this->startTime, $this->startMemory);
     }
 
     private function getPointName($providedName = null) {
@@ -37,11 +35,19 @@ class PHProfiler {
     }
 
     private function getUniquePointName($nameBase) {
-        $i = 0;
-        while (array_search($nameBase . $i, array_column($this->rememberedPoints, 'name')) !== false) {
-            $i++;
+        $nameSuffix = 0;
+        while ($this->isNameAlreadyTaken($nameBase . $nameSuffix)) {
+            $nameSuffix++;
         }
-        return $nameBase . $i;
+        return $nameBase . $nameSuffix;
+    }
+
+    private function isNameAlreadyTaken($name) {
+        $count = count(array_filter($this->rememberedPoints, function(AbstractPoint $element) use ($name) {
+            return $element->getName() === $name;
+        }));
+
+        return $count > 0;
     }
 
     public function exportToLogFile($providedFilePath = null) {

@@ -1,6 +1,8 @@
 <?php
 namespace PHProfilerTests;
 
+use PHProfiler\Point\AbstractPoint;
+
 abstract class AbstractFileExporterTest extends AbstractExporterTest {
     protected $fixedFileName;
 
@@ -59,13 +61,16 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
     }
 
     protected function getLineAsArray($line) {
-        return explode("\t\t", $line);
+        return explode("|", $line);
     }
 
-    protected function checkLine($expectedLine, $actualLine) {
-        self::assertEquals($expectedLine['name'], $actualLine[0]);
-        self::assertEquals($expectedLine['time'], $actualLine[1]);
-        self::assertEquals($expectedLine['memory'], $actualLine[2]);
+    protected function checkLine(AbstractPoint $expectedLine, $actualLine) {
+        self::assertEquals($expectedLine->getName(), trim($actualLine[0]));
+        self::assertEquals($expectedLine->getTimeCaptured(), trim($actualLine[1]));
+        self::assertEquals($expectedLine->getTimeElapsed(), trim($actualLine[2]));
+        self::assertEquals($expectedLine->getMemory(), trim($actualLine[3]));
+        self::assertEquals($expectedLine->getMemoryHuman(), trim($actualLine[4]));
+        self::assertEquals($expectedLine->getMemorySinceStart(), trim($actualLine[5]));
     }
 
     protected function getFixedFileName() {

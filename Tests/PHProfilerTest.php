@@ -2,6 +2,7 @@
 namespace PHProfilerTests;
 
 use PHProfiler\PHProfiler;
+use PHProfiler\Point\AbstractPoint;
 use PHProfilerTests\Testers\PHProfilerTester;
 use PHPUnit_Framework_TestCase;
 
@@ -32,14 +33,14 @@ class PHProfilerTest extends PHPUnit_Framework_TestCase {
         $profiler = PHProfilerTester::initialize();
         $profiler->rememberPoint('testPoint');
         self::assertCount(1, $profiler->getRememberedPoints());
-        self::assertEquals('testPoint', $profiler->getRememberedPoints()[0]['name']);
+        self::assertEquals('testPoint', $profiler->getRememberedPoints()[0]->getName());
     }
 
     public function testRememberDefaultPoint() {
         $profiler = PHProfilerTester::initialize();
         $profiler->rememberPoint();
         self::assertCount(1, $profiler->getRememberedPoints());
-        self::assertEquals('point0', $profiler->getRememberedPoints()[0]['name']);
+        self::assertEquals('point0', $profiler->getRememberedPoints()[0]->getName());
     }
 
     public function testRememberTwoDefaultPoints() {
@@ -47,8 +48,8 @@ class PHProfilerTest extends PHPUnit_Framework_TestCase {
         $profiler->rememberPoint();
         $profiler->rememberPoint();
         self::assertCount(2, $profiler->getRememberedPoints());
-        self::assertEquals('point0', $profiler->getRememberedPoints()[0]['name']);
-        self::assertEquals('point1', $profiler->getRememberedPoints()[1]['name']);
+        self::assertEquals('point0', $profiler->getRememberedPoints()[0]->getName());
+        self::assertEquals('point1', $profiler->getRememberedPoints()[1]->getName());
     }
 
     public function testExportToLogFile() {

@@ -6,7 +6,7 @@ class LogFileExporter extends FileExporter {
         return 'log';
     }
 
-    protected function printRow($filePointer, $row) {
-        fprintf($filePointer, $this->prepareRow($row));
+    protected function printPoint($filePointer, $point) {
+        fprintf($filePointer, $this->preparePoint($point));
     }
 }
