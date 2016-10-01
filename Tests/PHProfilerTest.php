@@ -2,7 +2,6 @@
 namespace PHProfilerTests;
 
 use PHProfiler\PHProfiler;
-use PHProfiler\Point\AbstractPoint;
 use PHProfilerTests\Testers\PHProfilerTester;
 use PHPUnit_Framework_TestCase;
 
