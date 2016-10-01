@@ -2,7 +2,7 @@
 
 A simple library for doing profiling without a need for thousands of external dependencies.
 
-[![Build Status](https://travis-ci.org/ngranko/phprofiler.svg?branch=master)](https://travis-ci.org/ngranko/phprofiler)
+[![Build Status](https://travis-ci.org/ngranko/phprofiler.svg?branch=master)](https://travis-ci.org/ngranko/phprofiler) [![Code Climate](https://codeclimate.com/github/ngranko/phprofiler/badges/gpa.svg)](https://codeclimate.com/github/ngranko/phprofiler)
 
 ## Installation
 
