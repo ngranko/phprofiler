@@ -2,4 +2,6 @@ language: php
 php:
 - 7.0
 - 5.6
-script: phpunit --configuration phpunit.xml
+script:
+- composer install
+- phpunit --configuration phpunit.xml
