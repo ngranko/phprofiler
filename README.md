@@ -20,7 +20,8 @@ Or you can move the contents of this repository to a folder of your liking and t
 
 To use the library simply create a new PHProfiler object:
 
-```
+```php
+<?php
 $profiler = PHProfiler::initialize();
 ```
 
@@ -30,7 +31,9 @@ This will initialize the profiler and set current time and memory consumption va
 
 To capture a point, do:
 
-```
+```php
+<?php
+$profiler = PHProfiler::initialize();
 $profiler->rememberPoint();
 ```
 
@@ -40,13 +43,19 @@ This will capture a current state of the system: time elapsed and memory usage.
 
 Depending on a type of export you want to do, do one of those:
 
-```
+```php
+<?php
+$profiler = PHProfiler::initialize();
+$profiler->rememberPoint();
 $profiler->exportToLogFile();
 ```
 
 or
 
-```
+```php
+<?php
+$profiler = PHProfiler::initialize();
+$profiler->rememberPoint();
 $profiler->exportToCsvFile();
 ```
 
