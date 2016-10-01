@@ -2,6 +2,8 @@
 
 A simple library for doing profiling without a need for thousands of external dependencies.
 
+[![Build Status](https://travis-ci.org/ngranko/phprofiler.svg?branch=master)](https://travis-ci.org/ngranko/phprofiler)
+
 ## Installation
 
 The simplest way to install it is to use Composer:
