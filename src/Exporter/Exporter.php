@@ -14,7 +14,7 @@ abstract class Exporter {
     abstract public function export();
 
     public function getHeaderRow() {
-        return Header::create();
+        return new Header();
     }
 
     protected function preparePoint(AbstractPoint $point) {

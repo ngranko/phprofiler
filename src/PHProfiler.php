@@ -2,6 +2,7 @@
 namespace PHProfiler;
 
 use PHProfiler\Exporter\CsvFileExporter;
+use PHProfiler\Exporter\ExporterFactory;
 use PHProfiler\Exporter\LogFileExporter;
 use PHProfiler\Point\AbstractPoint;
 use PHProfiler\Point\Point;
@@ -23,7 +24,7 @@ class PHProfiler {
 
     public function rememberPoint($name = null) {
         $pointName = $this->getPointName($name);
-        $this->rememberedPoints[] = Point::create($pointName, $this->startTime, $this->startMemory);
+        $this->rememberedPoints[] = new Point($pointName, $this->startTime, $this->startMemory);
     }
 
     private function getPointName($providedName = null) {
@@ -50,15 +51,11 @@ class PHProfiler {
         return $count > 0;
     }
 
-    public function exportToLogFile($providedFilePath = null) {
-        $exporter = new LogFileExporter($this->rememberedPoints);
-        $exporter->setFilePath($providedFilePath);
-        $exporter->export();
-    }
-
-    public function exportToCsvFile($providedFilePath = null) {
-        $exporter = new CsvFileExporter($this->rememberedPoints);
-        $exporter->setFilePath($providedFilePath);
+    public function export($type, $filePath = null) {
+        $exporter = ExporterFactory::getExporter($type, $this->rememberedPoints);
+        if (method_exists($exporter, 'setFilePath')) {
+            $exporter->setFilePath($filePath);
+        }
         $exporter->export();
     }
 }

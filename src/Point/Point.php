@@ -4,19 +4,15 @@ namespace PHProfiler\Point;
 use DateTime;
 
 class Point extends AbstractPoint {
-    protected function __construct($pointName, $startTime, $startMemory) {
+    public function __construct($pointName, $startTime, $startMemory) {
         $currentTime = microtime(true);
         $currentMemory = memory_get_usage();
         $this->name = $pointName;
         $this->timeCaptured = $this->getFormattedTime($currentTime);
-        $this->timeElapsed = number_format(microtime(true) - $startTime, 6, '.', '');
+        $this->timeElapsed = number_format($currentTime - $startTime, 6, '.', '');
         $this->memory = $currentMemory;
-        $this->memoryHuman = $this->getReadableMemoryUsage($this->memory);
+        $this->memoryHuman = $this->getReadableMemoryUsage($currentMemory);
         $this->memorySinceStart = $currentMemory - $startMemory;
-    }
-
-    public static function create($pointName, $startTime, $startMemory) {
-        return new static($pointName, $startTime, $startMemory);
     }
 
     private function getFormattedTime($time) {

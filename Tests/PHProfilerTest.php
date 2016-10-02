@@ -1,11 +1,15 @@
 <?php
 namespace PHProfilerTests;
 
+use PHProfiler\Exception\PHProfilerException;
+use PHProfiler\Exporter\ExporterType;
 use PHProfiler\PHProfiler;
 use PHProfilerTests\Testers\PHProfilerTester;
 use PHPUnit_Framework_TestCase;
 
 class PHProfilerTest extends PHPUnit_Framework_TestCase {
+    const INVALID_EXPORT_TYPE = 'test export';
+
     public function setUp() {
         parent::setUp();
         $this->removeTestFiles();
@@ -54,15 +58,24 @@ class PHProfilerTest extends PHPUnit_Framework_TestCase {
     public function testExportToLogFile() {
         self::assertFileNotExists($this->getTestLogFileName());
         $profiler = PHProfilerTester::initialize();
-        $profiler->exportToLogFile($this->getTestLogFileName());
+        $profiler->export(ExporterType::LOG, $this->getTestLogFileName());
         self::assertFileExists($this->getTestLogFileName());
     }
 
     public function testExportToCsvFile() {
         self::assertFileNotExists($this->getTestCsvFileName());
         $profiler = PHProfilerTester::initialize();
-        $profiler->exportToCsvFile($this->getTestCsvFileName());
+        $profiler->export(ExporterType::CSV, $this->getTestCsvFileName());
         self::assertFileExists($this->getTestCsvFileName());
+    }
+
+    public function testInvalidExport() {
+        try {
+            $profiler = PHProfilerTester::initialize();
+            $profiler->export(self::INVALID_EXPORT_TYPE, $this->getTestCsvFileName());
+        } catch (PHProfilerException $e) {
+            self::assertEquals('Unknown export type: test export', $e->getMessage());
+        }
     }
 
     public function tearDown() {
