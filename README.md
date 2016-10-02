@@ -50,6 +50,6 @@ $profiler->rememberPoint();
 $profiler->export(ExporterType::LOG);
 ```
 
-The first, required, parameter to the `export()` function is a type of export you want to do. Use `ExporterType` constants to specify it and see which types are available.
+The first, required, argument to the `export()` function is a type of export you want to do. Use `ExporterType` constants to specify it and see which types are available.
 
 By default, a file will be created in your current working directory, named `profiler_output_[timestamp].[extension]`. If you want to save result to some other place, simply specify a desired path (with a filename) as a second argument to the `export()` function.
