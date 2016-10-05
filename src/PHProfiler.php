@@ -12,14 +12,10 @@ class PHProfiler {
     private $startMemory;
     protected $rememberedPoints;
 
-    private function __construct($startTime, $startMemoryUsed) {
-        $this->startTime = $startTime;
-        $this->startMemory = $startMemoryUsed;
+    public function __construct() {
+        $this->startTime = microtime(true);
+        $this->startMemory = memory_get_usage();
         $this->rememberedPoints = [];
-    }
-
-    public static function initialize() {
-        return new static(microtime(true), memory_get_usage());
     }
 
     public function rememberPoint($name = null) {

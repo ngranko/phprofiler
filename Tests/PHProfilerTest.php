@@ -27,27 +27,27 @@ class PHProfilerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testInitialization() {
-        $instance = PHProfilerTester::initialize();
+        $instance = new PHProfilerTester();
         self::assertTrue($instance instanceof PHProfiler);
         self::assertEquals([], $instance->getRememberedPoints());
     }
 
     public function testRememberCustomPoint() {
-        $profiler = PHProfilerTester::initialize();
+        $profiler = new PHProfilerTester();
         $profiler->rememberPoint('testPoint');
         self::assertCount(1, $profiler->getRememberedPoints());
         self::assertEquals('testPoint', $profiler->getRememberedPoints()[0]->getName());
     }
 
     public function testRememberDefaultPoint() {
-        $profiler = PHProfilerTester::initialize();
+        $profiler = new PHProfilerTester();
         $profiler->rememberPoint();
         self::assertCount(1, $profiler->getRememberedPoints());
         self::assertEquals('point0', $profiler->getRememberedPoints()[0]->getName());
     }
 
     public function testRememberTwoDefaultPoints() {
-        $profiler = PHProfilerTester::initialize();
+        $profiler = new PHProfilerTester();
         $profiler->rememberPoint();
         $profiler->rememberPoint();
         self::assertCount(2, $profiler->getRememberedPoints());
@@ -57,21 +57,21 @@ class PHProfilerTest extends PHPUnit_Framework_TestCase {
 
     public function testExportToLogFile() {
         self::assertFileNotExists($this->getTestLogFileName());
-        $profiler = PHProfilerTester::initialize();
+        $profiler = new PHProfilerTester();
         $profiler->export(ExporterType::LOG, $this->getTestLogFileName());
         self::assertFileExists($this->getTestLogFileName());
     }
 
     public function testExportToCsvFile() {
         self::assertFileNotExists($this->getTestCsvFileName());
-        $profiler = PHProfilerTester::initialize();
+        $profiler = new PHProfilerTester();
         $profiler->export(ExporterType::CSV, $this->getTestCsvFileName());
         self::assertFileExists($this->getTestCsvFileName());
     }
 
     public function testInvalidExport() {
         try {
-            $profiler = PHProfilerTester::initialize();
+            $profiler = new PHProfilerTester();
             $profiler->export(self::INVALID_EXPORT_TYPE, $this->getTestCsvFileName());
         } catch (PHProfilerException $e) {
             self::assertEquals('Unknown export type: test export', $e->getMessage());

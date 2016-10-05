@@ -22,7 +22,7 @@ To use the library simply create a new PHProfiler object:
 
 ```php
 <?php
-$profiler = PHProfiler::initialize();
+$profiler = new PHProfiler();
 ```
 
 This will initialize the profiler and set current time and memory consumption values as reference to calculate relative time and memory usage against.
@@ -33,7 +33,7 @@ To capture a point, do:
 
 ```php
 <?php
-$profiler = PHProfiler::initialize();
+$profiler = new PHProfiler();
 $profiler->rememberPoint();
 ```
 
@@ -45,7 +45,7 @@ Depending on a type of export you want to do, do one of those:
 
 ```php
 <?php
-$profiler = PHProfiler::initialize();
+$profiler = new PHProfiler();
 $profiler->rememberPoint();
 $profiler->export(ExporterType::LOG);
 ```
