@@ -1,9 +1,9 @@
 <?php
 namespace PHProfilerTests\Testers;
 
-use PHProfiler\Exporter\CsvFileExporter;
+use PHProfiler\Exporter\FileExporter\CsvExporter;
 
-class CsvFileExportTester extends CsvFileExporter {
+class CsvExporterTester extends CsvExporter {
     public function getFilePath() {
         return $this->filePath;
     }

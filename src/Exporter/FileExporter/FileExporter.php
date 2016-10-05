@@ -1,7 +1,8 @@
 <?php
-namespace PHProfiler\Exporter;
+namespace PHProfiler\Exporter\FileExporter;
 
 use PHProfiler\Exception\PHProfilerException;
+use PHProfiler\Exporter\Exporter;
 
 abstract class FileExporter extends Exporter {
     protected $filePath;

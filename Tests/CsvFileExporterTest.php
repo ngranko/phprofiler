@@ -1,13 +1,13 @@
 <?php
 namespace PHProfilerTests;
 
-use PHProfilerTests\Testers\CsvFileExportTester;
+use PHProfilerTests\Testers\CsvExporterTester;
 
 class CsvFileExporterTest extends AbstractFileExporterTest {
     protected $fixedFileName = __DIR__ . '/../TestCsvExport.csv';
 
     protected function createExporter() {
-        $this->exporter = new CsvFileExportTester($this->getTestPoints());
+        $this->exporter = new CsvExporterTester($this->getTestPoints());
     }
 
     protected function getLinesFromFile($filePath) {

@@ -1,9 +1,9 @@
 <?php
-namespace PHProfiler\Exporter;
+namespace PHProfiler\Exporter\FileExporter;
 
 use PHProfiler\Point\AbstractPoint;
 
-class CsvFileExporter extends FileExporter {
+class CsvExporter extends FileExporter {
     protected function getDefaultExtension() {
         return 'csv';
     }

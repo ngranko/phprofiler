@@ -1,7 +1,7 @@
 <?php
-namespace PHProfiler\Exporter;
+namespace PHProfiler\Exporter\FileExporter;
 
-class LogFileExporter extends FileExporter {
+class LogExporter extends FileExporter {
     protected function getDefaultExtension() {
         return 'log';
     }

@@ -1,9 +1,9 @@
 <?php
 namespace PHProfilerTests\Testers;
 
-use PHProfiler\Exporter\LogFileExporter;
+use PHProfiler\Exporter\FileExporter\LogExporter;
 
-class LogFileExportTester extends LogFileExporter {
+class LogExporterTester extends LogExporter {
     public function getFilePath() {
         return $this->filePath;
     }
