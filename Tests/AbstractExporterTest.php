@@ -1,7 +1,8 @@
 <?php
 namespace PHProfilerTests;
 
-use PHProfiler\Exporter\FileExporter;
+use PHProfiler\Exporter\FileExporter\FileExporter;
+use PHProfiler\Point\AbstractPoint;
 use PHProfiler\Point\Point;
 use PHPUnit_Framework_TestCase;
 
@@ -24,11 +25,24 @@ abstract class AbstractExporterTest extends PHPUnit_Framework_TestCase {
 
     abstract protected function doExport();
 
+    abstract protected function createExporter();
+
     protected function getExporter() {
         return $this->exporter;
     }
 
     protected function getTestPoints() {
         return $this->testPoints;
+    }
+
+    abstract protected function toArray($point);
+
+    protected function checkPoint(AbstractPoint $expectedPoint, $actualPoint) {
+        self::assertEquals($expectedPoint->getName(), trim($actualPoint[0]));
+        self::assertEquals($expectedPoint->getTimeCaptured(), trim($actualPoint[1]));
+        self::assertEquals($expectedPoint->getTimeSinceStart(), trim($actualPoint[2]));
+        self::assertEquals($expectedPoint->getMemory(), trim($actualPoint[3]));
+        self::assertEquals($expectedPoint->getMemoryHuman(), trim($actualPoint[4]));
+        self::assertEquals($expectedPoint->getMemorySinceStart(), trim($actualPoint[5]));
     }
 }

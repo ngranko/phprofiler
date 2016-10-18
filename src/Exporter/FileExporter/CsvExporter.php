@@ -3,7 +3,7 @@ namespace PHProfiler\Exporter\FileExporter;
 
 use PHProfiler\Point\AbstractPoint;
 
-class CsvExporter extends FileExporter {
+class CsvExporter extends StringFileExporter {
     protected function getDefaultExtension() {
         return 'csv';
     }
@@ -12,7 +12,7 @@ class CsvExporter extends FileExporter {
         return $point->asArray();
     }
 
-    protected function printPoint($filePointer, $point) {
+    protected function writePoint($point, $filePointer) {
         fputcsv($filePointer, $this->preparePoint($point));
     }
 }

@@ -11,6 +11,13 @@ abstract class Exporter {
         $this->printData = $printData;
     }
 
+    /**
+     * @return AbstractPoint[]
+     */
+    protected function getPrintData() {
+        return $this->printData;
+    }
+
     abstract public function export();
 
     public function getHeaderRow() {
@@ -19,10 +26,10 @@ abstract class Exporter {
 
     protected function preparePoint(AbstractPoint $point) {
         return sprintf(
-            "%-28s| %-28s| %-28s| %-28s| %-28s| %-28s\n",
+            "%-28s | %28s | %28s | %28s | %28s | %28s\n",
             $point->getName(),
             $point->getTimeCaptured(),
-            $point->getTimeElapsed(),
+            $point->getTimeSinceStart(),
             $point->getMemory(),
             $point->getMemoryHuman(),
             $point->getMemorySinceStart()

@@ -1,12 +1,12 @@
 <?php
 namespace PHProfiler\Exporter\FileExporter;
 
-class LogExporter extends FileExporter {
+class LogExporter extends StringFileExporter {
     protected function getDefaultExtension() {
         return 'log';
     }
 
-    protected function printPoint($filePointer, $point) {
+    protected function writePoint($point, $filePointer) {
         fprintf($filePointer, $this->preparePoint($point));
     }
 }

@@ -15,7 +15,7 @@ abstract class AbstractPoint {
         return [
             $this->getName(),
             $this->getTimeCaptured(),
-            $this->getTimeElapsed(),
+            $this->getTimeSinceStart(),
             $this->getMemory(),
             $this->getMemoryHuman(),
             $this->getMemorySinceStart(),
@@ -30,7 +30,7 @@ abstract class AbstractPoint {
         return $this->timeCaptured;
     }
 
-    public function getTimeElapsed() {
+    public function getTimeSinceStart() {
         return $this->timeElapsed;
     }
 
