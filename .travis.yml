@@ -4,6 +4,3 @@ php:
 - 5.6
 install: composer install
 script: phpunit --configuration phpunit.xml
-addons:
-    code_climate:
-        repo_token: 15145ea8b0b8a476337935e4a27b01ebbe70cbf9e5d54b93c839449b1c85bb2b
