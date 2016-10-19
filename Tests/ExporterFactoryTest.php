@@ -31,7 +31,7 @@ class ExporterFactoryTest extends PHPUnit_Framework_TestCase {
 
     public function testGetInvalidExporter() {
         try {
-            $exporter = ExporterFactory::getExporter(self::INVALID_EXPORT_TYPE, []);
+            ExporterFactory::getExporter(self::INVALID_EXPORT_TYPE, []);
             self::fail('This test should throw an exception');
         } catch (PHProfilerException $e) {
             self::assertEquals(sprintf('Unknown export type: %s', self::INVALID_EXPORT_TYPE), $e->getMessage());
