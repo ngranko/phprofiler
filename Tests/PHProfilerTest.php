@@ -1,29 +1,31 @@
 <?php
 namespace PHProfilerTests;
 
-use PHProfiler\Exception\PHProfilerException;
 use PHProfiler\Exporter\ExporterType;
 use PHProfiler\PHProfiler;
 use PHProfilerTests\Testers\PHProfilerTester;
 use PHPUnit_Framework_TestCase;
 
 class PHProfilerTest extends PHPUnit_Framework_TestCase {
-    const INVALID_EXPORT_TYPE = 'test export';
+    const TEST_FILE_NAME = __DIR__ . '/playground/testExport';
+
+    use FileSystemHandler;
 
     public function setUp() {
         parent::setUp();
-        $this->removeTestFiles();
+        $this->createTestFolderIfNotExists();
+        $this->deleteTestFile();
     }
 
-    private function removeTestFiles() {
-        $this->removeCreatedFile($this->getTestLogFileName());
-        $this->removeCreatedFile($this->getTestCsvFileName());
-    }
-
-    private function removeCreatedFile($path) {
-        if (file_exists($path)) {
-            unlink($path);
+    private function deleteTestFile() {
+        if (file_exists(self::TEST_FILE_NAME)) {
+            unlink(self::TEST_FILE_NAME);
         }
+    }
+
+    public function tearDown() {
+        parent::tearDown();
+        $this->deleteTestFile();
     }
 
     public function testInitialization() {
@@ -55,39 +57,10 @@ class PHProfilerTest extends PHPUnit_Framework_TestCase {
         self::assertEquals('point1', $profiler->getRememberedPoints()[1]->getName());
     }
 
-    public function testExportToLogFile() {
-        self::assertFileNotExists($this->getTestLogFileName());
+    public function testExport() {
+        self::assertFileNotExists(self::TEST_FILE_NAME);
         $profiler = new PHProfilerTester();
-        $profiler->export(ExporterType::LOG, $this->getTestLogFileName());
-        self::assertFileExists($this->getTestLogFileName());
-    }
-
-    public function testExportToCsvFile() {
-        self::assertFileNotExists($this->getTestCsvFileName());
-        $profiler = new PHProfilerTester();
-        $profiler->export(ExporterType::CSV, $this->getTestCsvFileName());
-        self::assertFileExists($this->getTestCsvFileName());
-    }
-
-    public function testInvalidExport() {
-        try {
-            $profiler = new PHProfilerTester();
-            $profiler->export(self::INVALID_EXPORT_TYPE, $this->getTestCsvFileName());
-        } catch (PHProfilerException $e) {
-            self::assertEquals('Unknown export type: test export', $e->getMessage());
-        }
-    }
-
-    public function tearDown() {
-        parent::tearDown();
-        $this->removeTestFiles();
-    }
-
-    private function getTestLogFileName() {
-        return __DIR__ . '/testLogExport.log';
-    }
-
-    private function getTestCsvFileName() {
-        return __DIR__ . '/testCsvExport.csv';
+        $profiler->export(ExporterType::LOG, self::TEST_FILE_NAME);
+        self::assertFileExists(self::TEST_FILE_NAME);
     }
 }

@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+    font-family: Verdana;
+    font-size: 14px;
+}
+
+table tr th, table tr td {
+    text-align: right;
+    padding: 4px;
+    cursor: default;
+}
+
+table tr th:nth-child(1), table tr td:nth-child(1) {
+    text-align: left;
+}
+
+table tr th:hover, table tr td:hover {
+    background: #ededed;
+}

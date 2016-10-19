@@ -4,9 +4,12 @@ namespace PHProfilerTests;
 abstract class AbstractFileExporterTest extends AbstractExporterTest {
     protected $fixedFileName;
 
+    use FileSystemHandler;
+
     public function setUp() {
         parent::setUp();
         $this->removeCreatedFile($this->getFixedFileName());
+        $this->createTestFolderIfNotExists();
     }
 
     public function testExportWithFixedName() {
@@ -28,7 +31,7 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
         $this->createExporter();
         if (isset($filePath)) {
             $this->getExporter()->setFilePath($filePath);
-            self::assertEquals($this->getFixedFileName(), $this->getExporter()->getFilePath());
+            self::assertEquals($filePath, $this->getExporter()->getFilePath());
         }
         $this->getExporter()->export();
         self::assertFileExists($this->getExporter()->getFilePath());

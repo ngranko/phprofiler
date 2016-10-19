@@ -2,17 +2,21 @@
 namespace PHProfilerTests;
 
 use DOMElement;
+use DOMXPath;
 use PHProfiler\Exporter\FileExporter\XmlExporter;
 
 class XmlExporterTest extends AbstractDomFileExporterTest {
-    protected $fixedFileName = __DIR__ . '/../TestXmlExport.xml';
+    protected $fixedFileName = __DIR__ . '/playground/TestXmlExport.xml';
 
     protected function createExporter() {
         $this->exporter = new XmlExporter($this->getTestPoints());
     }
 
+    protected function loadDomTree($filePath) {
+        $this->dom->load($filePath);
+    }
+
     protected function checkWrapper() {
-        self::assertEquals(1, $this->xpath->query('/report')->length);
         self::assertEquals(1, $this->xpath->query('/report/points')->length);
     }
 

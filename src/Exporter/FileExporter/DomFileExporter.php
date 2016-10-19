@@ -10,10 +10,12 @@ abstract class DomFileExporter extends FileExporter {
 
     public function __construct($printData) {
         parent::__construct($printData);
-        $this->dom = new DOMDocument();
+        $this->createEmptyDomDocument();
         $this->dom->preserveWhiteSpace = false;
         $this->dom->formatOutput = true;
     }
+
+    abstract protected function createEmptyDomDocument();
 
     public function export() {
         $this->prepareData();
@@ -41,7 +43,5 @@ abstract class DomFileExporter extends FileExporter {
         $parentElement->appendChild($pointNode);
     }
 
-    protected function writeData() {
-        $this->dom->save($this->getFilePath());
-    }
+    abstract protected function writeData();
 }

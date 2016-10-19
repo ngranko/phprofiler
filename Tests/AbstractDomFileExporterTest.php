@@ -17,15 +17,18 @@ abstract class AbstractDomFileExporterTest extends AbstractFileExporterTest {
     }
 
     protected function checkExportedFile($filePath) {
-        $this->loadContents($filePath);
+        $this->prepareContents($filePath);
         $this->checkWrapper();
         $this->checkExportedPoints();
     }
 
-    protected function loadContents($filePath) {
-        $this->dom->load($filePath);
+    protected function prepareContents($filePath) {
+        self::assertFileExists($filePath);
+        $this->loadDomTree($filePath);
         $this->xpath = new DOMXPath($this->dom);
     }
+
+    abstract protected function loadDomTree($filePath);
 
     abstract protected function checkWrapper();
 
@@ -35,8 +38,7 @@ abstract class AbstractDomFileExporterTest extends AbstractFileExporterTest {
         self::assertEquals(count($expectedPoints), $actualPoints->length);
 
         foreach ($actualPoints as $point) {
-            $pointArray = $this->toArray($point);
-            $this->checkPoint(array_shift($expectedPoints), $pointArray);
+            $this->checkPoint(array_shift($expectedPoints), $this->toArray($point));
         }
     }
 
