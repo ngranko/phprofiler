@@ -31,7 +31,7 @@ abstract class DomFileExporter extends FileExporter {
 
     protected function preparePointsData() {
         $parentElement = $this->getRootDataElement();
-        foreach ($this->getPrintData() as $point) {
+        foreach ($this->getPoints() as $point) {
             $pointNode = $this->preparePoint($point);
             $this->addPointToDom($parentElement, $pointNode);
         }

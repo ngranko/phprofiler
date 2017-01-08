@@ -28,7 +28,7 @@ abstract class StringFileExporter extends FileExporter {
     }
 
     protected function writePoints($filePointer) {
-        foreach ($this->getPrintData() as $point) {
+        foreach ($this->getPoints() as $point) {
             $this->writePoint($point, $filePointer);
         }
     }

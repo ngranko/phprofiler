@@ -14,25 +14,15 @@ abstract class Exporter {
     /**
      * @return AbstractPoint[]
      */
-    protected function getPrintData() {
+    protected function getPoints() {
         return $this->printData;
     }
-
-    abstract public function export();
 
     public function getHeaderRow() {
         return new Header();
     }
 
-    protected function preparePoint(AbstractPoint $point) {
-        return sprintf(
-            "%-28s | %28s | %28s | %28s | %28s | %28s\n",
-            $point->getName(),
-            $point->getTimeCaptured(),
-            $point->getTimeSinceStart(),
-            $point->getMemory(),
-            $point->getMemoryHuman(),
-            $point->getMemorySinceStart()
-        );
-    }
+    abstract public function export();
+
+    abstract protected function preparePoint(AbstractPoint $point);
 }

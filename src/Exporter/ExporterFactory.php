@@ -18,6 +18,8 @@ final class ExporterFactory {
                 return new XmlExporter($data);
             case ExporterType::HTML:
                 return new HtmlExporter($data);
+            case ExporterType::SCREEN:
+                return new ScreenExporter($data);
             default:
                 throw new PHProfilerException(sprintf('Unknown export type: %s', $type));
         }

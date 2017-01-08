@@ -6,4 +6,5 @@ interface ExporterType {
     const CSV = 'csv';
     const XML = 'xml';
     const HTML = 'html';
+    const SCREEN = 'screen';
 }

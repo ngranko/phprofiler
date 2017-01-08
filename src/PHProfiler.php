@@ -1,9 +1,7 @@
 <?php
 namespace PHProfiler;
 
-use PHProfiler\Exporter\CsvExporter;
 use PHProfiler\Exporter\ExporterFactory;
-use PHProfiler\Exporter\LogExporter;
 use PHProfiler\Point\AbstractPoint;
 use PHProfiler\Point\Point;
 

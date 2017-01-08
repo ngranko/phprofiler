@@ -26,6 +26,7 @@ class ExporterFactoryTest extends PHPUnit_Framework_TestCase {
             [ExporterType::CSV, 'PHProfiler\Exporter\FileExporter\CsvExporter'],
             [ExporterType::XML, 'PHProfiler\Exporter\FileExporter\XmlExporter'],
             [ExporterType::HTML, 'PHProfiler\Exporter\FileExporter\HtmlExporter'],
+            [ExporterType::SCREEN, 'PHProfiler\Exporter\ScreenExporter'],
         ];
     }
 
