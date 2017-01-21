@@ -3,3 +3,5 @@
 /vendor
 composer.phar
 CoverageReport
+profiler_output_*
+Tests/playground/*

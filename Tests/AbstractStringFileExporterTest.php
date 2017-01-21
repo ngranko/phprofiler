@@ -2,10 +2,14 @@
 namespace PHProfilerTests;
 
 abstract class AbstractStringFileExporterTest extends AbstractFileExporterTest {
+    protected $withHeader = true;
+
     protected function checkExportedFile($filePath) {
         $fileRows = $this->getLinesFromFile($filePath);
-        self::assertCount(count($this->getTestPoints()) + 1, $fileRows);
-        $this->checkHead(array_shift($fileRows));
+        self::assertCount(count($this->getTestPoints()) + (int)$this->withHeader, $fileRows);
+        if ($this->withHeader) {
+            $this->checkHead(array_shift($fileRows));
+        }
         $this->checkBody($fileRows);
     }
 

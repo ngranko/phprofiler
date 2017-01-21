@@ -13,12 +13,12 @@ abstract class AbstractPoint {
 
     public function asArray() {
         return [
-            $this->getName(),
-            $this->getTimeCaptured(),
-            $this->getTimeSinceStart(),
-            $this->getMemory(),
-            $this->getMemoryHuman(),
-            $this->getMemorySinceStart(),
+            'name' => $this->getName(),
+            'time_captured' => $this->getTimeCaptured(),
+            'time_since_start' => $this->getTimeSinceStart(),
+            'memory' => $this->getMemory(),
+            'memory_human' => $this->getMemoryHuman(),
+            'memory_since_start' => $this->getMemorySinceStart(),
         ];
     }
 

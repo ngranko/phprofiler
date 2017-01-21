@@ -5,8 +5,9 @@ use DOMImplementation;
 use PHProfiler\Point\AbstractPoint;
 
 class HtmlExporter extends DomFileExporter {
+    const STYLESHEET_DIRNAME = '/static/';
     const STYLESHEET_FILENAME = 'phprofilerReport.css';
-    const STYLESHEET_RELATIVE_PATH = '/static/' . self::STYLESHEET_FILENAME;
+    const STYLESHEET_RELATIVE_PATH = self::STYLESHEET_DIRNAME . self::STYLESHEET_FILENAME;
 
     protected function getDefaultExtension() {
         return 'html';
@@ -74,8 +75,8 @@ class HtmlExporter extends DomFileExporter {
     }
 
     private function copyStylesheet($dirname) {
-        if (!file_exists($dirname . '/static')) {
-            mkdir(dirname($this->getFilePath()) . '/static');
+        if (!file_exists($dirname . self::STYLESHEET_DIRNAME)) {
+            mkdir(dirname($this->getFilePath()) . self::STYLESHEET_DIRNAME);
         }
         copy(__DIR__ . '/../../../assets/' . self::STYLESHEET_FILENAME, $dirname . self::STYLESHEET_RELATIVE_PATH);
     }

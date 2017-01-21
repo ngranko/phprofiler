@@ -10,7 +10,7 @@ class HtmlExporterTest extends AbstractDomFileExporterTest {
     public function tearDown() {
         parent::tearDown();
         unlink(dirname($this->exporter->getFilePath()) . HtmlExporter::STYLESHEET_RELATIVE_PATH);
-        rmdir(dirname($this->exporter->getFilePath()) . '/static');
+        rmdir(dirname($this->exporter->getFilePath()) . HtmlExporter::STYLESHEET_DIRNAME);
     }
 
     protected function createExporter() {

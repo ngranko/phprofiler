@@ -7,4 +7,5 @@ interface ExporterType {
     const XML = 'xml';
     const HTML = 'html';
     const SCREEN = 'screen';
+    const JSON = 'json';
 }

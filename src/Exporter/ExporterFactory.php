@@ -4,6 +4,7 @@ namespace PHProfiler\Exporter;
 use PHProfiler\Exception\PHProfilerException;
 use PHProfiler\Exporter\FileExporter\CsvExporter;
 use PHProfiler\Exporter\FileExporter\HtmlExporter;
+use PHProfiler\Exporter\FileExporter\JsonExporter;
 use PHProfiler\Exporter\FileExporter\LogExporter;
 use PHProfiler\Exporter\FileExporter\XmlExporter;
 
@@ -20,6 +21,8 @@ final class ExporterFactory {
                 return new HtmlExporter($data);
             case ExporterType::SCREEN:
                 return new ScreenExporter($data);
+            case ExporterType::JSON:
+                return new JsonExporter($data);
             default:
                 throw new PHProfilerException(sprintf('Unknown export type: %s', $type));
         }
