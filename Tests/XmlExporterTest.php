@@ -2,7 +2,6 @@
 namespace PHProfilerTests;
 
 use DOMElement;
-use DOMXPath;
 use PHProfiler\Exporter\FileExporter\XmlExporter;
 
 class XmlExporterTest extends AbstractDomFileExporterTest {

@@ -4,9 +4,9 @@ namespace PHProfilerTests;
 use PHProfiler\Exporter\ExporterType;
 use PHProfiler\PHProfiler;
 use PHProfilerTests\Testers\PHProfilerTester;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class PHProfilerTest extends PHPUnit_Framework_TestCase {
+class PHProfilerTest extends TestCase {
     const TEST_FILE_NAME = __DIR__ . '/playground/testExport';
 
     use FileSystemHandler;

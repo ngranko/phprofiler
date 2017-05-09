@@ -1,7 +1,6 @@
 <?php
 namespace PHProfilerTests;
 
-use DOMXPath;
 use PHProfiler\Exporter\FileExporter\HtmlExporter;
 
 class HtmlExporterTest extends AbstractDomFileExporterTest {

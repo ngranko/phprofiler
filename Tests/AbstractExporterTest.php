@@ -4,9 +4,9 @@ namespace PHProfilerTests;
 use PHProfiler\Exporter\FileExporter\FileExporter;
 use PHProfiler\Point\AbstractPoint;
 use PHProfiler\Point\Point;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-abstract class AbstractExporterTest extends PHPUnit_Framework_TestCase {
+abstract class AbstractExporterTest extends TestCase {
     /** @var FileExporter */
     protected $exporter;
     private $testPoints = [];

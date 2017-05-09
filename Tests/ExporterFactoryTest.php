@@ -4,9 +4,9 @@ namespace PHProfilerTests;
 use PHProfiler\Exception\PHProfilerException;
 use PHProfiler\Exporter\ExporterFactory;
 use PHProfiler\Exporter\ExporterType;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ExporterFactoryTest extends PHPUnit_Framework_TestCase {
+class ExporterFactoryTest extends TestCase {
     const INVALID_EXPORT_TYPE = 'test export';
 
     /**
