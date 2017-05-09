@@ -19,7 +19,7 @@ class ScreenExporter extends Exporter {
         }
     }
 
-    private function printPoint($point) {
+    protected function printPoint($point) {
         print_r($this->preparePoint($point));
     }
 
