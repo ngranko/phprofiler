@@ -27,6 +27,7 @@ class ExporterFactoryTest extends TestCase {
             [ExporterType::XML, 'PHProfiler\Exporter\FileExporter\XmlExporter'],
             [ExporterType::HTML, 'PHProfiler\Exporter\FileExporter\HtmlExporter'],
             [ExporterType::SCREEN, 'PHProfiler\Exporter\ScreenExporter'],
+            [ExporterType::JSON, 'PHProfiler\Exporter\FileExporter\JsonExporter'],
         ];
     }
 
