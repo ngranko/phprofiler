@@ -4,13 +4,7 @@ namespace PHProfilerTests;
 use PHProfiler\Exporter\FileExporter\HtmlExporter;
 
 class HtmlExporterTest extends AbstractDomFileExporterTest {
-    protected $fixedFileName = __DIR__ . '/playground/TestHtmlExport.html';
-
-    public function tearDown() {
-        parent::tearDown();
-        unlink(dirname($this->exporter->getFilePath()) . HtmlExporter::STYLESHEET_RELATIVE_PATH);
-        rmdir(dirname($this->exporter->getFilePath()) . HtmlExporter::STYLESHEET_DIRNAME);
-    }
+    protected $fixedFileName = 'TestHtmlExport.html';
 
     protected function createExporter() {
         $this->exporter = new HtmlExporter($this->getTestPoints());

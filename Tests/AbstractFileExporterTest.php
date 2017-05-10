@@ -1,30 +1,25 @@
 <?php
 namespace PHProfilerTests;
 
+use org\bovigo\vfs\vfsStream;
+
 abstract class AbstractFileExporterTest extends AbstractExporterTest {
     protected $fixedFileName;
 
-    use FileSystemHandler;
-
     public function setUp() {
         parent::setUp();
-        $this->removeCreatedFile($this->getFixedFileName());
-        $this->createTestFolderIfNotExists();
+        vfsStream::setup('playground');
     }
 
-    public function testExportWithFixedName() {
-        $this->doExport($this->getFixedFileName());
-        $this->checkExportedFile($this->getFixedFileName());
+    public function testGetFilePath() {
+        $this->createExporter();
+        $this->getExporter()->setFilePath($this->getTestFilepath());
+        self::assertEquals($this->getTestFilepath(), $this->getExporter()->getFilePath());
     }
 
-    public function testExportWithDefaultName() {
-        $this->doExport();
-        $this->checkExportedFile($this->getExporter()->getFilePath());
-    }
-
-    public function tearDown() {
-        parent::tearDown();
-        $this->removeCreatedFile($this->getExporter()->getFilePath());
+    public function testExport() {
+        $this->doExport($this->getTestFilepath());
+        $this->checkExportedFile($this->getTestFilepath());
     }
 
     protected function doExport($filePath = null) {
@@ -39,13 +34,7 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
 
     abstract protected function checkExportedFile($filePath);
 
-    protected function getFixedFileName() {
-        return $this->fixedFileName;
-    }
-
-    private function removeCreatedFile($path) {
-        if (file_exists($path)) {
-            unlink($path);
-        }
+    protected function getTestFilepath() {
+        return vfsStream::url('playground') . DIRECTORY_SEPARATOR . $this->fixedFileName;
     }
 }

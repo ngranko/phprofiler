@@ -5,7 +5,7 @@ use DOMElement;
 use PHProfiler\Exporter\FileExporter\XmlExporter;
 
 class XmlExporterTest extends AbstractDomFileExporterTest {
-    protected $fixedFileName = __DIR__ . '/playground/TestXmlExport.xml';
+    protected $fixedFileName = 'TestXmlExport.xml';
 
     protected function createExporter() {
         $this->exporter = new XmlExporter($this->getTestPoints());

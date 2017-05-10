@@ -1,31 +1,18 @@
 <?php
 namespace PHProfilerTests;
 
+use org\bovigo\vfs\vfsStream;
 use PHProfiler\Exporter\ExporterType;
 use PHProfiler\PHProfiler;
 use PHProfilerTests\Testers\PHProfilerTester;
 use PHPUnit\Framework\TestCase;
 
 class PHProfilerTest extends TestCase {
-    const TEST_FILE_NAME = __DIR__ . '/playground/testExport';
-
-    use FileSystemHandler;
+    const TEST_FILE_NAME = 'testExport';
 
     public function setUp() {
         parent::setUp();
-        $this->createTestFolderIfNotExists();
-        $this->deleteTestFile();
-    }
-
-    private function deleteTestFile() {
-        if (file_exists(self::TEST_FILE_NAME)) {
-            unlink(self::TEST_FILE_NAME);
-        }
-    }
-
-    public function tearDown() {
-        parent::tearDown();
-        $this->deleteTestFile();
+        vfsStream::setup('playground');
     }
 
     public function testInitialization() {
@@ -58,9 +45,14 @@ class PHProfilerTest extends TestCase {
     }
 
     public function testExport() {
-        self::assertFileNotExists(self::TEST_FILE_NAME);
+        $testFilename = $this->getTestFilepath();
+        self::assertFileNotExists($testFilename);
         $profiler = new PHProfilerTester();
-        $profiler->export(ExporterType::LOG, self::TEST_FILE_NAME);
-        self::assertFileExists(self::TEST_FILE_NAME);
+        $profiler->export(ExporterType::LOG, $testFilename);
+        self::assertFileExists($testFilename);
+    }
+
+    private function getTestFilepath() {
+        return vfsStream::url('playground') . DIRECTORY_SEPARATOR . self::TEST_FILE_NAME;
     }
 }
