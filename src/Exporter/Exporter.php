@@ -14,11 +14,11 @@ abstract class Exporter {
     /**
      * @return AbstractPoint[]
      */
-    protected function getPoints() {
+    protected function getPoints(): array {
         return $this->printData;
     }
 
-    public function getHeaderRow() {
+    public function getHeaderRow(): Header {
         return new Header();
     }
 

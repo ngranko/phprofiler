@@ -24,14 +24,6 @@ class ScreenExporter extends Exporter {
     }
 
     protected function preparePoint(AbstractPoint $point) {
-        return sprintf(
-            "%-28s | %28s | %28s | %28s | %28s | %28s<br>",
-            $point->getName(),
-            $point->getTimeCaptured(),
-            $point->getTimeSinceStart(),
-            $point->getMemory(),
-            $point->getMemoryHuman(),
-            $point->getMemorySinceStart()
-        );
+        return sprintf('%s<br>', $point);
     }
 }

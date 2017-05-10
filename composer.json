@@ -1,28 +1,29 @@
-{
-  "name": "ngranko/phprofiler",
-  "description": "A simple profiler for php without a need for any external dependencies",
-  "keywords": ["php", "profiler"],
-  "license": "MIT",
-  "authors": [
     {
-      "name": "Nikita Granko",
-      "email": "igrannick@gmail.com"
+        "name": "ngranko/phprofiler",
+        "description": "A simple profiler for php without a need for any external dependencies",
+        "keywords": ["php", "profiler"],
+        "license": "MIT",
+        "authors": [
+            {
+                "name": "Nikita Granko",
+                "email": "igrannick@gmail.com"
+            }
+        ],
+        "support": {
+            "email": "igrannick@gmail.com",
+            "issues": "https://github.com/ngranko/phprofiler/issues"
+        },
+        "require": {
+            "php" : "^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.1",
+            "mikey179/vfsStream": "^1.6"
+        },
+        "autoload": {
+            "psr-4": {
+              "PHProfiler\\": "src/",
+              "PHProfilerTests\\": "Tests/"
+            }
+        }
     }
-  ],
-  "support": {
-    "email": "igrannick@gmail.com",
-    "issues": "https://github.com/ngranko/phprofiler/issues"
-  },
-  "require": {
-    "php" : "^7.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^6.1"
-  },
-  "autoload": {
-    "psr-4": {
-      "PHProfiler\\": "src/",
-      "PHProfilerTests\\": "Tests/"
-    }
-  }
-}

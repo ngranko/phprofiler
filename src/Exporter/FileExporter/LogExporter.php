@@ -13,14 +13,6 @@ class LogExporter extends StringFileExporter {
     }
 
     protected function preparePoint(AbstractPoint $point) {
-        return sprintf(
-            "%-28s | %28s | %28s | %28s | %28s | %28s\n",
-            $point->getName(),
-            $point->getTimeCaptured(),
-            $point->getTimeSinceStart(),
-            $point->getMemory(),
-            $point->getMemoryHuman(),
-            $point->getMemorySinceStart()
-        );
+        return sprintf("%s\n", $point);
     }
 }

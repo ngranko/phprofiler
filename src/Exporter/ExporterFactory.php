@@ -9,7 +9,7 @@ use PHProfiler\Exporter\FileExporter\LogExporter;
 use PHProfiler\Exporter\FileExporter\XmlExporter;
 
 final class ExporterFactory {
-    public static function getExporter($type, $data) {
+    public static function getExporter(string $type, $data): Exporter {
         switch ($type) {
             case ExporterType::LOG:
                 return new LogExporter($data);

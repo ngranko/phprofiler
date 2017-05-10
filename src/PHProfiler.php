@@ -6,8 +6,11 @@ use PHProfiler\Point\AbstractPoint;
 use PHProfiler\Point\Point;
 
 class PHProfiler {
+    /** @var float $startTime */
     private $startTime;
+    /** @var string $startMemory */
     private $startMemory;
+    /** @var array $rememberedPoints */
     protected $rememberedPoints;
 
     public function __construct() {
@@ -16,12 +19,12 @@ class PHProfiler {
         $this->rememberedPoints = [];
     }
 
-    public function rememberPoint($name = null) {
+    public function rememberPoint(string $name = null) {
         $pointName = $this->getPointName($name);
         $this->rememberedPoints[] = new Point($pointName, $this->startTime, $this->startMemory);
     }
 
-    private function getPointName($providedName = null) {
+    private function getPointName(string $providedName = null): string {
         $name = $providedName;
         if (is_null($name)) {
             $name = $this->getUniquePointName('point');
@@ -29,7 +32,7 @@ class PHProfiler {
         return $name;
     }
 
-    private function getUniquePointName($nameBase) {
+    private function getUniquePointName(string $nameBase): string {
         $nameSuffix = 0;
         while ($this->isNameAlreadyTaken($nameBase . $nameSuffix)) {
             $nameSuffix++;
@@ -37,7 +40,7 @@ class PHProfiler {
         return $nameBase . $nameSuffix;
     }
 
-    private function isNameAlreadyTaken($name) {
+    private function isNameAlreadyTaken(string $name): bool {
         $count = count(array_filter($this->rememberedPoints, function(AbstractPoint $element) use ($name) {
             return $element->getName() === $name;
         }));
@@ -45,7 +48,7 @@ class PHProfiler {
         return $count > 0;
     }
 
-    public function export($type, $filePath = null) {
+    public function export(string $type, string $filePath = null) {
         $exporter = ExporterFactory::getExporter($type, $this->rememberedPoints);
         if (method_exists($exporter, 'setFilePath')) {
             $exporter->setFilePath($filePath);
