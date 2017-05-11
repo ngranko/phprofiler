@@ -7,8 +7,9 @@ use PHProfiler\Point\Point;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractExporterTest extends TestCase {
-    /** @var Exporter */
+    /** @var Exporter $exporter */
     protected $exporter;
+    /** @var array $testPoints */
     private $testPoints = [];
 
     const START_TIME = 1473262478.911812;
@@ -29,15 +30,18 @@ abstract class AbstractExporterTest extends TestCase {
 
     abstract protected function createExporter();
 
-    protected function getExporter() {
+    protected function getExporter(): Exporter {
+        if (!isset($this->exporter)) {
+            $this->createExporter();
+        }
         return $this->exporter;
     }
 
-    protected function getTestPoints() {
+    protected function getTestPoints(): array {
         return $this->testPoints;
     }
 
-    abstract protected function toArray($point);
+    abstract protected function toArray($point): array;
 
     protected function checkPoint(AbstractPoint $expectedPoint, $actualPoint) {
         self::assertEquals($expectedPoint->getName(), trim($actualPoint[0]));

@@ -8,7 +8,7 @@ class PHProfilerTester extends PHProfiler {
     /**
      * @return AbstractPoint[]
      */
-    public function getRememberedPoints() {
+    public function getRememberedPoints(): array {
         return $this->rememberedPoints;
     }
 }

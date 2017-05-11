@@ -19,7 +19,7 @@ class CsvExporterTest extends AbstractStringFileExporterTest {
         return array_filter($contents);
     }
 
-    protected function toArray($point) {
+    protected function toArray($point): array {
         return $point;
     }
 }

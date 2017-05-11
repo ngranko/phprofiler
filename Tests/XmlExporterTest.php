@@ -23,7 +23,7 @@ class XmlExporterTest extends AbstractDomFileExporterTest {
         return $this->xpath->query('/report/points/point');
     }
 
-    protected function toArray($point) {
+    protected function toArray($point): array {
         /** @var DOMElement $point */
         return [
             $point->getElementsByTagName('name')->item(0)->nodeValue,

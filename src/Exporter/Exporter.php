@@ -34,7 +34,7 @@ abstract class Exporter {
         }
     }
 
-    abstract protected function exportPoint($point);
+    abstract protected function exportPoint(AbstractPoint $point);
 
     abstract protected function preparePoint(AbstractPoint $point);
 }

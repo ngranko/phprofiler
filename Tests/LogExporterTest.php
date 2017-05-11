@@ -10,7 +10,7 @@ class LogExporterTest extends AbstractStringFileExporterTest  {
         $this->exporter = new LogExporter($this->getTestPoints());
     }
 
-    protected function toArray($point) {
+    protected function toArray($point): array {
         return explode("|", $point);
     }
 }

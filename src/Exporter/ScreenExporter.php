@@ -9,11 +9,11 @@ class ScreenExporter extends Exporter {
         $this->exportPoints();
     }
 
-    protected function exportPoint($point) {
+    protected function exportPoint(AbstractPoint $point) {
         print_r($this->preparePoint($point));
     }
 
-    protected function preparePoint(AbstractPoint $point) {
+    protected function preparePoint(AbstractPoint $point): string {
         return sprintf('%s<br>', $point);
     }
 }

@@ -53,6 +53,6 @@ class PHProfilerTest extends TestCase {
     }
 
     private function getTestFilepath() {
-        return vfsStream::url('playground') . DIRECTORY_SEPARATOR . self::TEST_FILE_NAME;
+        return sprintf('%s/%s', vfsStream::url('playground'), self::TEST_FILE_NAME);
     }
 }

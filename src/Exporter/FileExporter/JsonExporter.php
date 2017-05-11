@@ -4,7 +4,7 @@ namespace PHProfiler\Exporter\FileExporter;
 use PHProfiler\Point\AbstractPoint;
 
 class JsonExporter extends StringFileExporter {
-    protected function getDefaultExtension() {
+    protected function getDefaultExtension(): string {
         return 'json';
     }
 
@@ -12,19 +12,19 @@ class JsonExporter extends StringFileExporter {
         fprintf($this->filePointer, $this->preparePoints());
     }
 
-    private function preparePoints() {
+    private function preparePoints(): string {
         $points = [];
         foreach ($this->getPoints() as $point) {
-            $points[] = $this->exportPoint($point);
+            $points[] = $this->preparePoint($point);
         }
         return json_encode($points);
     }
 
-    protected function preparePoint(AbstractPoint $point) {
+    protected function preparePoint(AbstractPoint $point): array {
         return $point->asArray();
     }
 
-    protected function exportPoint($point) {
+    protected function exportPoint(AbstractPoint $point): array {
         return $this->preparePoint($point);
     }
 }

@@ -15,7 +15,7 @@ class JsonExporterTest extends AbstractStringFileExporterTest {
         return array_filter(json_decode(file_get_contents($filePath), true));
     }
 
-    protected function toArray($point) {
+    protected function toArray($point): array {
         return array_values($point);
     }
 }

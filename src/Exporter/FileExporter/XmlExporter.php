@@ -2,24 +2,25 @@
 namespace PHProfiler\Exporter\FileExporter;
 
 use DOMDocument;
+use DOMElement;
 use PHProfiler\Point\AbstractPoint;
 
 class XmlExporter extends DomFileExporter {
-    protected function getDefaultExtension() {
+    protected function getDefaultExtension(): string {
         return 'xml';
     }
 
-    protected function createEmptyDomDocument() {
-        $this->dom = new DOMDocument();
+    protected function createEmptyDomDocument(): DOMDocument {
+        return new DOMDocument();
     }
 
-    protected function prepareWrapper() {
+    protected function prepareWrapper(): DOMElement {
         $root = $this->dom->appendChild($this->dom->createElement('report'));
         $root->appendChild($this->dom->createElement('points'));
         return $this->dom->getElementsByTagName('points')->item(0);
     }
 
-    protected function preparePoint(AbstractPoint $point) {
+    protected function preparePoint(AbstractPoint $point): DOMElement {
         $pointNode = $this->dom->createElement('point');
         $pointNode->appendChild($this->dom->createElement('name', htmlentities($point->getName())));
         $pointNode->appendChild($this->dom->createElement('timeCaptured', $point->getTimeCaptured()));
@@ -30,7 +31,7 @@ class XmlExporter extends DomFileExporter {
         return $pointNode;
     }
 
-    protected function writeData() {
+    protected function writeDocument() {
         $this->dom->save($this->getFilePath());
     }
 }

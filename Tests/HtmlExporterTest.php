@@ -39,7 +39,7 @@ class HtmlExporterTest extends AbstractDomFileExporterTest {
         return $this->xpath->query('/html/body/table/tbody/tr');
     }
 
-    protected function toArray($point) {
+    protected function toArray($point): array {
         /** @var \DOMElement $point */
         $dataNodes = $point->getElementsByTagName('td');
         return [

@@ -2,8 +2,10 @@
 namespace PHProfilerTests;
 
 use org\bovigo\vfs\vfsStream;
+use PHProfiler\Exporter\FileExporter\FileExporter;
 
 abstract class AbstractFileExporterTest extends AbstractExporterTest {
+    /** @var string $fixedFileName */
     protected $fixedFileName;
 
     public function setUp() {
@@ -11,10 +13,17 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
         vfsStream::setup('playground');
     }
 
+    public function testGetDefaultFilePath() {
+        /** @var FileExporter $exporter */
+        $exporter = $this->getExporter();
+        self::assertRegExp(sprintf('~%s/profiler_output_[0-9]+.[a-z]+~', getcwd()), $exporter->getFilePath());
+    }
+
     public function testGetFilePath() {
-        $this->createExporter();
-        $this->getExporter()->setFilePath($this->getTestFilepath());
-        self::assertEquals($this->getTestFilepath(), $this->getExporter()->getFilePath());
+        /** @var FileExporter $exporter */
+        $exporter = $this->getExporter();
+        $exporter->setFilePath($this->getTestFilepath());
+        self::assertEquals($this->getTestFilepath(), $exporter->getFilePath());
     }
 
     public function testExport() {
@@ -23,18 +32,19 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
     }
 
     protected function doExport($filePath = null) {
-        $this->createExporter();
+        /** @var FileExporter $exporter */
+        $exporter = $this->getExporter();
         if (isset($filePath)) {
-            $this->getExporter()->setFilePath($filePath);
-            self::assertEquals($filePath, $this->getExporter()->getFilePath());
+            $exporter->setFilePath($filePath);
+            self::assertEquals($filePath, $exporter->getFilePath());
         }
         $this->getExporter()->export();
-        self::assertFileExists($this->getExporter()->getFilePath());
+        self::assertFileExists($exporter->getFilePath());
     }
 
     abstract protected function checkExportedFile($filePath);
 
     protected function getTestFilepath() {
-        return vfsStream::url('playground') . DIRECTORY_SEPARATOR . $this->fixedFileName;
+        return sprintf('%s/%s', vfsStream::url('playground'), $this->fixedFileName);
     }
 }

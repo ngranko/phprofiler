@@ -19,17 +19,14 @@ class PHProfiler {
         $this->rememberedPoints = [];
     }
 
-    public function rememberPoint(string $name = null) {
+    public function rememberPoint(string $name = null): PHProfiler {
         $pointName = $this->getPointName($name);
         $this->rememberedPoints[] = new Point($pointName, $this->startTime, $this->startMemory);
+        return $this;
     }
 
     private function getPointName(string $providedName = null): string {
-        $name = $providedName;
-        if (is_null($name)) {
-            $name = $this->getUniquePointName('point');
-        }
-        return $name;
+        return is_null($providedName) ? $this->getUniquePointName('point') : $providedName;
     }
 
     private function getUniquePointName(string $nameBase): string {

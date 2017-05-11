@@ -3,6 +3,7 @@ namespace PHProfiler\Exporter\FileExporter;
 
 use DOMDocument;
 use DOMElement;
+use PHProfiler\Point\AbstractPoint;
 
 abstract class DomFileExporter extends FileExporter {
     /** @var DOMDocument $dom */
@@ -12,28 +13,28 @@ abstract class DomFileExporter extends FileExporter {
 
     public function __construct($printData) {
         parent::__construct($printData);
-        $this->createEmptyDomDocument();
+        $this->dom = $this->createEmptyDomDocument();
         $this->dom->preserveWhiteSpace = false;
         $this->dom->formatOutput = true;
     }
 
-    abstract protected function createEmptyDomDocument();
+    abstract protected function createEmptyDomDocument(): DOMDocument;
 
     public function export() {
-        $this->prepareData();
-        $this->writeData();
+        $this->createDocument();
+        $this->writeDocument();
     }
 
-    protected function prepareData() {
+    protected function createDocument() {
         $this->dataRoot = $this->prepareWrapper();
         $this->exportPoints();
     }
 
     abstract protected function prepareWrapper();
 
-    protected function exportPoint($point) {
+    protected function exportPoint(AbstractPoint $point) {
         $this->dataRoot->appendChild($this->preparePoint($point));
     }
 
-    abstract protected function writeData();
+    abstract protected function writeDocument();
 }

@@ -18,9 +18,9 @@ abstract class FileExporter extends Exporter {
         return $this->filePath;
     }
 
-    protected function getDefaultFilePath(): string {
+    private function getDefaultFilePath(): string {
         return sprintf('%s/profiler_output_%d.%s', getcwd(), time(), $this->getDefaultExtension());
     }
 
-    abstract protected function getDefaultExtension();
+    abstract protected function getDefaultExtension(): string;
 }

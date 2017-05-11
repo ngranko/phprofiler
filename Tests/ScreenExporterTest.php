@@ -13,12 +13,11 @@ class ScreenExporterTest extends AbstractExporterTest {
     }
 
     protected function doExport() {
-        $this->createExporter();
         $this->getExporter()->export();
         return $this->getExporter()->getExportResults();
     }
 
-    protected function toArray($point) {
+    protected function toArray($point): array {
         return explode("|", substr($point, 0, -4));
     }
 
