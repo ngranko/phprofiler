@@ -18,11 +18,23 @@ abstract class Exporter {
         return $this->printData;
     }
 
+    abstract public function export();
+
+    protected function exportHeader() {
+        $this->exportPoint($this->getHeaderRow());
+    }
+
     public function getHeaderRow(): Header {
         return new Header();
     }
 
-    abstract public function export();
+    protected function exportPoints() {
+        foreach ($this->getPoints() as $point) {
+            $this->exportPoint($point);
+        }
+    }
+
+    abstract protected function exportPoint($point);
 
     abstract protected function preparePoint(AbstractPoint $point);
 }

@@ -8,8 +8,8 @@ class LogExporter extends StringFileExporter {
         return 'log';
     }
 
-    protected function writePoint($point, $filePointer) {
-        fprintf($filePointer, $this->preparePoint($point));
+    protected function exportPoint($point) {
+        fprintf($this->filePointer, $this->preparePoint($point));
     }
 
     protected function preparePoint(AbstractPoint $point) {

@@ -7,6 +7,8 @@ use DOMElement;
 abstract class DomFileExporter extends FileExporter {
     /** @var DOMDocument $dom */
     protected $dom;
+    /** @var DOMElement $dataRoot */
+    protected $dataRoot;
 
     public function __construct($printData) {
         parent::__construct($printData);
@@ -23,24 +25,14 @@ abstract class DomFileExporter extends FileExporter {
     }
 
     protected function prepareData() {
-        $this->prepareWrapper();
-        $this->preparePointsData();
+        $this->dataRoot = $this->prepareWrapper();
+        $this->exportPoints();
     }
 
     abstract protected function prepareWrapper();
 
-    protected function preparePointsData() {
-        $parentElement = $this->getRootDataElement();
-        foreach ($this->getPoints() as $point) {
-            $pointNode = $this->preparePoint($point);
-            $this->addPointToDom($parentElement, $pointNode);
-        }
-    }
-
-    abstract protected function getRootDataElement();
-
-    protected function addPointToDom(DOMElement $parentElement, DOMElement $pointNode) {
-        $parentElement->appendChild($pointNode);
+    protected function exportPoint($point) {
+        $this->dataRoot->appendChild($this->preparePoint($point));
     }
 
     abstract protected function writeData();

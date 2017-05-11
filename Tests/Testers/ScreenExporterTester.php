@@ -7,7 +7,7 @@ use PHProfiler\Exporter\ScreenExporter;
 class ScreenExporterTester extends ScreenExporter {
     private $exportResult;
 
-    protected function printPoint($point) {
+    protected function exportPoint($point) {
         $this->exportResult[] = $this->preparePoint($point);
     }
 

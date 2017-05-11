@@ -4,10 +4,12 @@ namespace PHProfiler\Exporter\FileExporter;
 use PHProfiler\Exception\PHProfilerException;
 
 abstract class StringFileExporter extends FileExporter {
+    protected $filePointer;
+
     public function export() {
-        $filePointer = $this->openFileForWriting($this->getFilePath());
-        $this->writeDataToFile($filePointer);
-        $this->closeFile($filePointer);
+        $this->filePointer = $this->openFileForWriting($this->getFilePath());
+        $this->writeDataToFile();
+        $this->closeFile();
     }
 
     protected function openFileForWriting($filePath) {
@@ -18,24 +20,15 @@ abstract class StringFileExporter extends FileExporter {
         return $pointer;
     }
 
-    protected function writeDataToFile($filePointer) {
-        $this->writeHeader($filePointer);
-        $this->writePoints($filePointer);
-    }
-
-    protected function writeHeader($filePointer) {
-        $this->writePoint($this->getHeaderRow(), $filePointer);
-    }
-
-    protected function writePoints($filePointer) {
-        foreach ($this->getPoints() as $point) {
-            $this->writePoint($point, $filePointer);
+    protected function writeDataToFile() {
+        if (!isset($this->filePointer)) {
+            throw new PHProfilerException('Attempting to write data to a file before opening it for writing');
         }
+        $this->exportHeader();
+        $this->exportPoints();
     }
 
-    protected function closeFile($filePointer) {
-        fclose($filePointer);
+    protected function closeFile() {
+        fclose($this->filePointer);
     }
-
-    abstract protected function writePoint($point, $filePointer);
 }

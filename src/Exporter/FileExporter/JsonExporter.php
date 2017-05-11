@@ -8,18 +8,14 @@ class JsonExporter extends StringFileExporter {
         return 'json';
     }
 
-    protected function writeHeader($filePointer) {
-        // no headers on that export type
-    }
-
-    protected function writePoints($filePointer) {
-        fprintf($filePointer, $this->preparePoints());
+    protected function exportPoints() {
+        fprintf($this->filePointer, $this->preparePoints());
     }
 
     private function preparePoints() {
         $points = [];
         foreach ($this->getPoints() as $point) {
-            $points[] = $this->preparePoint($point);
+            $points[] = $this->exportPoint($point);
         }
         return json_encode($points);
     }
@@ -28,7 +24,7 @@ class JsonExporter extends StringFileExporter {
         return $point->asArray();
     }
 
-    protected function writePoint($point, $filePointer) {
-        // we are writing all points at once, no need for this function
+    protected function exportPoint($point) {
+        return $this->preparePoint($point);
     }
 }

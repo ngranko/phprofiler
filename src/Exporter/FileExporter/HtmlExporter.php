@@ -25,6 +25,7 @@ class HtmlExporter extends DomFileExporter {
         $head->appendChild($this->createStylesheetLink());
         $body = $root->appendChild($this->dom->createElement('body'));
         $body->appendChild($this->createTable());
+        return $this->dom->getElementsByTagName('tbody')->item(0);
     }
 
     private function createStylesheetLink() {
@@ -57,10 +58,6 @@ class HtmlExporter extends DomFileExporter {
         return $tableHead;
     }
 
-    protected function getRootDataElement() {
-        return $this->dom->getElementsByTagName('tbody')->item(0);
-    }
-
     protected function preparePoint(AbstractPoint $point) {
         $pointNode = $this->dom->createElement('tr');
         foreach ($point->asArray() as $value) {
@@ -78,6 +75,9 @@ class HtmlExporter extends DomFileExporter {
         if (!file_exists($dirname . self::STYLESHEET_DIRNAME)) {
             mkdir(dirname($this->getFilePath()) . self::STYLESHEET_DIRNAME);
         }
-        copy(__DIR__ . '/../../../assets/' . self::STYLESHEET_FILENAME, $dirname . self::STYLESHEET_RELATIVE_PATH);
+        copy(
+            sprintf('%s/../../../assets/%s', __DIR__, self::STYLESHEET_FILENAME),
+            $dirname . self::STYLESHEET_RELATIVE_PATH
+        );
     }
 }

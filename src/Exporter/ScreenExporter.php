@@ -5,21 +5,11 @@ use PHProfiler\Point\AbstractPoint;
 
 class ScreenExporter extends Exporter {
     public function export() {
-        $this->printHeader();
-        $this->printPoints();
+        $this->exportHeader();
+        $this->exportPoints();
     }
 
-    private function printHeader() {
-        $this->printPoint($this->getHeaderRow());
-    }
-
-    private function printPoints() {
-        foreach ($this->getPoints() as $point) {
-            $this->printPoint($point);
-        }
-    }
-
-    protected function printPoint($point) {
+    protected function exportPoint($point) {
         print_r($this->preparePoint($point));
     }
 

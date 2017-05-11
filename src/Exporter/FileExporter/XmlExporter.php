@@ -16,9 +16,6 @@ class XmlExporter extends DomFileExporter {
     protected function prepareWrapper() {
         $root = $this->dom->appendChild($this->dom->createElement('report'));
         $root->appendChild($this->dom->createElement('points'));
-    }
-
-    protected function getRootDataElement() {
         return $this->dom->getElementsByTagName('points')->item(0);
     }
 

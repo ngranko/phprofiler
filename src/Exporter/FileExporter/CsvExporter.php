@@ -8,11 +8,11 @@ class CsvExporter extends StringFileExporter {
         return 'csv';
     }
 
-    protected function preparePoint(AbstractPoint $point) {
-        return $point->asArray();
+    protected function exportPoint($point) {
+        fputcsv($this->filePointer, $this->preparePoint($point));
     }
 
-    protected function writePoint($point, $filePointer) {
-        fputcsv($filePointer, $this->preparePoint($point));
+    protected function preparePoint(AbstractPoint $point) {
+        return $point->asArray();
     }
 }
