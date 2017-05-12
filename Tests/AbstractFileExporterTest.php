@@ -2,6 +2,7 @@
 namespace PHProfilerTests;
 
 use org\bovigo\vfs\vfsStream;
+use PHProfiler\Exception\PHProfilerException;
 use PHProfiler\Exporter\FileExporter\FileExporter;
 
 abstract class AbstractFileExporterTest extends AbstractExporterTest {
@@ -29,6 +30,11 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
     public function testExport() {
         $this->doExport($this->getTestFilepath());
         $this->checkExportedFile($this->getTestFilepath());
+    }
+
+    public function testFailedExport() {
+        $this->expectException(PHProfilerException::class);
+        $this->doExport(vfsStream::url('fail'));
     }
 
     protected function doExport($filePath = null) {
