@@ -11,16 +11,16 @@ class ExporterFactoryTest extends TestCase {
 
     /**
      * @dataProvider getExporterDataProvider()
-     * @param $type
-     * @param $className
+     * @param string $type
+     * @param string $className
      */
-    public function testGetExporter($type, $className) {
+    public function testGetExporter(string $type, string $className) {
         $exporter = ExporterFactory::getExporter($type, []);
 
         self::assertInstanceOf($className, $exporter);
     }
 
-    public function getExporterDataProvider() {
+    public function getExporterDataProvider(): array {
         return [
             [ExporterType::LOG, 'PHProfiler\Exporter\FileExporter\LogExporter'],
             [ExporterType::CSV, 'PHProfiler\Exporter\FileExporter\CsvExporter'],

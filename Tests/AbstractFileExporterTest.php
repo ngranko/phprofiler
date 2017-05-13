@@ -37,7 +37,7 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
         $this->doExport(vfsStream::url('fail'));
     }
 
-    protected function doExport($filePath = null) {
+    protected function doExport(string $filePath = null) {
         /** @var FileExporter $exporter */
         $exporter = $this->getExporter();
         if (isset($filePath)) {
@@ -48,9 +48,9 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
         self::assertFileExists($exporter->getFilePath());
     }
 
-    abstract protected function checkExportedFile($filePath);
+    abstract protected function checkExportedFile(string $filePath);
 
-    protected function getTestFilepath() {
+    protected function getTestFilepath(): string {
         return sprintf('%s/%s', vfsStream::url('playground'), $this->fixedFileName);
     }
 }

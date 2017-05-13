@@ -52,7 +52,7 @@ class PHProfilerTest extends TestCase {
         self::assertFileExists($testFilename);
     }
 
-    private function getTestFilepath() {
+    private function getTestFilepath(): string {
         return sprintf('%s/%s', vfsStream::url('playground'), self::TEST_FILE_NAME);
     }
 }

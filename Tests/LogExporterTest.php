@@ -4,6 +4,7 @@ namespace PHProfilerTests;
 use PHProfiler\Exporter\FileExporter\LogExporter;
 
 class LogExporterTest extends AbstractStringFileExporterTest  {
+    /** @var string $fixedFileName */
     protected $fixedFileName = '/TestLogExport.log';
 
     protected function createExporter() {

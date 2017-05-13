@@ -1,21 +1,23 @@
 <?php
 namespace PHProfilerTests;
 
+use DOMNodeList;
 use PHProfiler\Exporter\FileExporter\HtmlExporter;
 
 class HtmlExporterTest extends AbstractDomFileExporterTest {
+    /** @var string $fixedFileName */
     protected $fixedFileName = 'TestHtmlExport.html';
 
     protected function createExporter() {
         $this->exporter = new HtmlExporter($this->getTestPoints());
     }
 
-    protected function checkExportedFile($filePath) {
+    protected function checkExportedFile(string $filePath) {
         self::assertFileExists(dirname($filePath) . HtmlExporter::STYLESHEET_RELATIVE_PATH);
         parent::checkExportedFile($filePath);
     }
 
-    protected function loadDomTree($filePath) {
+    protected function loadDomTree(string $filePath) {
         $this->dom->loadHTMLFile($filePath);
     }
 
@@ -35,7 +37,7 @@ class HtmlExporterTest extends AbstractDomFileExporterTest {
         self::assertEquals('Memory compared to start (b)', $headerValues->item(5)->nodeValue);
     }
 
-    protected function getExportedPoints() {
+    protected function getExportedPoints(): DOMNodeList {
         return $this->xpath->query('/html/body/table/tbody/tr');
     }
 

@@ -12,7 +12,7 @@ class ScreenExporterTest extends AbstractExporterTest {
         $this->checkExportResult($this->doExport());
     }
 
-    protected function doExport() {
+    protected function doExport(): array {
         $this->getExporter()->export();
         return $this->getExporter()->getExportResults();
     }
@@ -21,7 +21,7 @@ class ScreenExporterTest extends AbstractExporterTest {
         return explode("|", substr($point, 0, -4));
     }
 
-    private function checkExportResult($exportResult) {
+    private function checkExportResult(array $exportResult) {
         unset($exportResult[0]);
 
         $expectedPoints = $this->getTestPoints();

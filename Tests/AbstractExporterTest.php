@@ -43,7 +43,7 @@ abstract class AbstractExporterTest extends TestCase {
 
     abstract protected function toArray($point): array;
 
-    protected function checkPoint(AbstractPoint $expectedPoint, $actualPoint) {
+    protected function checkPoint(AbstractPoint $expectedPoint, array $actualPoint) {
         self::assertEquals($expectedPoint->getName(), trim($actualPoint[0]));
         self::assertEquals($expectedPoint->getTimeCaptured(), trim($actualPoint[1]));
         self::assertEquals($expectedPoint->getTimeSinceStart(), trim($actualPoint[2]));

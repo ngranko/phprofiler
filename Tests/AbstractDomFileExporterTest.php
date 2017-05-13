@@ -2,6 +2,7 @@
 namespace PHProfilerTests;
 
 use DOMDocument;
+use DOMNodeList;
 use DOMXPath;
 
 abstract class AbstractDomFileExporterTest extends AbstractFileExporterTest {
@@ -16,19 +17,19 @@ abstract class AbstractDomFileExporterTest extends AbstractFileExporterTest {
         $this->dom = new DOMDocument();
     }
 
-    protected function checkExportedFile($filePath) {
+    protected function checkExportedFile(string $filePath) {
         $this->prepareContents($filePath);
         $this->checkWrapper();
         $this->checkExportedPoints();
     }
 
-    protected function prepareContents($filePath) {
+    protected function prepareContents(string $filePath) {
         self::assertFileExists($filePath);
         $this->loadDomTree($filePath);
         $this->xpath = new DOMXPath($this->dom);
     }
 
-    abstract protected function loadDomTree($filePath);
+    abstract protected function loadDomTree(string $filePath);
 
     abstract protected function checkWrapper();
 
@@ -42,5 +43,5 @@ abstract class AbstractDomFileExporterTest extends AbstractFileExporterTest {
         }
     }
 
-    abstract protected function getExportedPoints();
+    abstract protected function getExportedPoints(): DOMNodeList;
 }
