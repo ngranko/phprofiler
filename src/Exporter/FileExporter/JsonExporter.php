@@ -9,7 +9,7 @@ class JsonExporter extends StringFileExporter {
     }
 
     protected function exportPoints() {
-        fprintf($this->filePointer, $this->preparePoints());
+        fprintf($this->filePointer, '%s', $this->preparePoints());
     }
 
     private function preparePoints(): string {

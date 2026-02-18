@@ -3,7 +3,6 @@ namespace PHProfiler\Exporter\FileExporter;
 
 use DOMDocument;
 use DOMElement;
-use Exception;
 use PHProfiler\Exception\PHProfilerException;
 use PHProfiler\Point\AbstractPoint;
 
@@ -33,10 +32,8 @@ class XmlExporter extends DomFileExporter {
         return $pointNode;
     }
 
-    protected function writeDocument() {
-        try {
-            $this->dom->save($this->getFilePath());
-        } catch (Exception $e) {
+    protected function writeDocument(): void {
+        if ($this->dom->save($this->getFilePath()) === false) {
             throw new PHProfilerException(sprintf('Error exporting to a provided file: %s', $this->getFilePath()));
         }
     }

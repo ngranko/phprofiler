@@ -1,7 +1,6 @@
 <?php
 namespace PHProfiler\Exporter\FileExporter;
 
-use Exception;
 use PHProfiler\Exception\PHProfilerException;
 
 abstract class StringFileExporter extends FileExporter {
@@ -14,10 +13,9 @@ abstract class StringFileExporter extends FileExporter {
         $this->closeFile();
     }
 
-    protected function openFileForWriting(string $filePath) {
-        try {
-            $pointer = fopen($filePath, 'w');
-        } catch (Exception $e) {
+    protected function openFileForWriting(string $filePath): void {
+        $pointer = fopen($filePath, 'w');
+        if ($pointer === false) {
             throw new PHProfilerException(sprintf('Error opening provided file: %s', $filePath));
         }
         $this->filePointer = $pointer;

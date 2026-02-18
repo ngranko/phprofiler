@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class PHProfilerTest extends TestCase {
     const TEST_FILE_NAME = 'testExport';
 
-    public function setUp() {
+    protected function setUp(): void {
         parent::setUp();
         vfsStream::setup('playground');
     }
@@ -46,7 +46,7 @@ class PHProfilerTest extends TestCase {
 
     public function testExport() {
         $testFilename = $this->getTestFilepath();
-        self::assertFileNotExists($testFilename);
+        self::assertFileDoesNotExist($testFilename);
         $profiler = new PHProfilerTester();
         $profiler->export(ExporterType::LOG, $testFilename);
         self::assertFileExists($testFilename);

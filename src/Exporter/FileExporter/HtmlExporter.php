@@ -5,7 +5,6 @@ use DOMDocument;
 use DOMImplementation;
 use DOMAttr;
 use DOMElement;
-use Exception;
 use PHProfiler\Exception\PHProfilerException;
 use PHProfiler\Point\AbstractPoint;
 
@@ -20,7 +19,7 @@ class HtmlExporter extends DomFileExporter {
 
     protected function createEmptyDomDocument(): DOMDocument {
         $implementation = new DOMImplementation();
-        return $implementation->createDocument(null, null, $implementation->createDocumentType("html"));
+        return $implementation->createDocument('', '', $implementation->createDocumentType("html"));
     }
 
     protected function prepareWrapper(): DOMElement {
@@ -71,13 +70,11 @@ class HtmlExporter extends DomFileExporter {
         return $pointNode;
     }
 
-    protected function writeDocument() {
-        try {
-            $this->dom->saveHTMLFile($this->getFilePath());
-            $this->copyStylesheet(dirname($this->getFilePath()));
-        } catch (Exception $e) {
+    protected function writeDocument(): void {
+        if (!$this->dom->saveHTMLFile($this->getFilePath())) {
             throw new PHProfilerException(sprintf('Error exporting to a provided file: %s', $this->getFilePath()));
         }
+        $this->copyStylesheet(dirname($this->getFilePath()));
     }
 
     private function copyStylesheet(string $dirname) {

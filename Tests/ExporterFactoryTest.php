@@ -4,23 +4,20 @@ namespace PHProfilerTests;
 use PHProfiler\Exception\PHProfilerException;
 use PHProfiler\Exporter\ExporterFactory;
 use PHProfiler\Exporter\ExporterType;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ExporterFactoryTest extends TestCase {
     const INVALID_EXPORT_TYPE = 'test export';
 
-    /**
-     * @dataProvider getExporterDataProvider()
-     * @param string $type
-     * @param string $className
-     */
+    #[DataProvider('getExporterDataProvider')]
     public function testGetExporter(string $type, string $className) {
         $exporter = ExporterFactory::getExporter($type, []);
 
         self::assertInstanceOf($className, $exporter);
     }
 
-    public function getExporterDataProvider(): array {
+    public static function getExporterDataProvider(): array {
         return [
             [ExporterType::LOG, 'PHProfiler\Exporter\FileExporter\LogExporter'],
             [ExporterType::CSV, 'PHProfiler\Exporter\FileExporter\CsvExporter'],

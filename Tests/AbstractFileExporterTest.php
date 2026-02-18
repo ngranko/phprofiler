@@ -9,7 +9,7 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
     /** @var string $fixedFileName */
     protected $fixedFileName;
 
-    public function setUp() {
+    protected function setUp(): void {
         parent::setUp();
         vfsStream::setup('playground');
     }
@@ -17,7 +17,7 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
     public function testGetDefaultFilePath() {
         /** @var FileExporter $exporter */
         $exporter = $this->getExporter();
-        self::assertRegExp(sprintf('~%s/profiler_output_[0-9]+.[a-z]+~', getcwd()), $exporter->getFilePath());
+        self::assertMatchesRegularExpression(sprintf('~%s/profiler_output_[0-9]+.[a-z]+~', getcwd()), $exporter->getFilePath());
     }
 
     public function testGetFilePath() {
@@ -37,7 +37,7 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
         $this->doExport(vfsStream::url('fail'));
     }
 
-    protected function doExport(string $filePath = null) {
+    protected function doExport(?string $filePath = null) {
         /** @var FileExporter $exporter */
         $exporter = $this->getExporter();
         if (isset($filePath)) {

@@ -12,7 +12,7 @@ abstract class AbstractDomFileExporterTest extends AbstractFileExporterTest {
     /** @var DOMXPath $xpath */
     protected $xpath;
 
-    public function setUp() {
+    protected function setUp(): void {
         parent::setUp();
         $this->dom = new DOMDocument();
     }
