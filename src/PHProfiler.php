@@ -8,7 +8,7 @@ use PHProfiler\Point\Point;
 class PHProfiler {
     /** @var float $startTime */
     private $startTime;
-    /** @var string $startMemory */
+    /** @var int $startMemory */
     private $startMemory;
     /** @var array $rememberedPoints */
     protected $rememberedPoints;
@@ -19,13 +19,13 @@ class PHProfiler {
         $this->rememberedPoints = [];
     }
 
-    public function rememberPoint(string $name = null): PHProfiler {
+    public function rememberPoint(?string $name = null): PHProfiler {
         $pointName = $this->getPointName($name);
         $this->rememberedPoints[] = new Point($pointName, $this->startTime, $this->startMemory);
         return $this;
     }
 
-    private function getPointName(string $providedName = null): string {
+    private function getPointName(?string $providedName = null): string {
         return is_null($providedName) ? $this->getUniquePointName('point') : $providedName;
     }
 
@@ -45,9 +45,9 @@ class PHProfiler {
         return $count > 0;
     }
 
-    public function export(string $type, string $filePath = null) {
+    public function export(string $type, ?string $filePath = null): void {
         $exporter = ExporterFactory::getExporter($type, $this->rememberedPoints);
-        if (method_exists($exporter, 'setFilePath')) {
+        if ($filePath !== null && method_exists($exporter, 'setFilePath')) {
             $exporter->setFilePath($filePath);
         }
         $exporter->export();

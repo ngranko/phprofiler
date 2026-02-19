@@ -15,7 +15,7 @@ abstract class AbstractExporterTest extends TestCase {
     const START_TIME = 1473262478.911812;
     const START_MEMORY = 3920000;
 
-    public function setUp() {
+    protected function setUp(): void {
         parent::setUp();
 
         $this->testPoints[] = new Point('test point 1', self::START_TIME, self::START_MEMORY);

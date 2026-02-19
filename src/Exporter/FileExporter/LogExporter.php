@@ -9,7 +9,7 @@ class LogExporter extends StringFileExporter {
     }
 
     protected function exportPoint(AbstractPoint $point) {
-        fprintf($this->filePointer, $this->preparePoint($point));
+        fprintf($this->filePointer, '%s', $this->preparePoint($point));
     }
 
     protected function preparePoint(AbstractPoint $point): string {

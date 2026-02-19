@@ -9,7 +9,7 @@ class JsonExporter extends StringFileExporter {
     }
 
     protected function exportPoints() {
-        fprintf($this->filePointer, $this->preparePoints());
+        fprintf($this->filePointer, '%s', $this->preparePoints());
     }
 
     private function preparePoints(): string {
@@ -17,7 +17,7 @@ class JsonExporter extends StringFileExporter {
         foreach ($this->getPoints() as $point) {
             $points[] = $this->preparePoint($point);
         }
-        return json_encode($points);
+        return json_encode($points, JSON_THROW_ON_ERROR);
     }
 
     protected function preparePoint(AbstractPoint $point): array {

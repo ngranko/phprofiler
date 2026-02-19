@@ -4,7 +4,7 @@ namespace PHProfiler\Point;
 use DateTime;
 
 class Point extends AbstractPoint {
-    public function __construct(string $pointName, string $startTime, string $startMemory) {
+    public function __construct(string $pointName, float $startTime, int $startMemory) {
         $currentTime = microtime(true);
         $currentMemory = memory_get_usage();
         $this->name = $pointName;

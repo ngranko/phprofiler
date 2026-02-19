@@ -9,7 +9,7 @@ class CsvExporter extends StringFileExporter {
     }
 
     protected function exportPoint(AbstractPoint $point) {
-        fputcsv($this->filePointer, $this->preparePoint($point));
+        fputcsv($this->filePointer, $this->preparePoint($point), ',', '"', '');
     }
 
     protected function preparePoint(AbstractPoint $point): array {
