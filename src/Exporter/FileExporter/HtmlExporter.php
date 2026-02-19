@@ -71,7 +71,8 @@ class HtmlExporter extends DomFileExporter {
     }
 
     protected function writeDocument(): void {
-        if (!$this->dom->saveHTMLFile($this->getFilePath())) {
+        $bytesWritten = $this->dom->saveHTMLFile($this->getFilePath());
+        if ($bytesWritten === false || $bytesWritten === 0) {
             throw new PHProfilerException(sprintf('Error exporting to a provided file: %s', $this->getFilePath()));
         }
         $this->copyStylesheet(dirname($this->getFilePath()));

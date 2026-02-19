@@ -15,7 +15,7 @@ class CsvExporterTest extends AbstractStringFileExporterTest {
         $contents = [];
         $pointer = fopen($filePath, 'r');
         while (!feof($pointer)) {
-            $contents[] = fgetcsv($pointer, 0, ',', '"', '\\');
+            $contents[] = fgetcsv($pointer, 0, ',', '"', '');
         }
         return array_filter($contents);
     }

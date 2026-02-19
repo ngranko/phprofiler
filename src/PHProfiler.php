@@ -8,7 +8,7 @@ use PHProfiler\Point\Point;
 class PHProfiler {
     /** @var float $startTime */
     private $startTime;
-    /** @var string $startMemory */
+    /** @var int $startMemory */
     private $startMemory;
     /** @var array $rememberedPoints */
     protected $rememberedPoints;

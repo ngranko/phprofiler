@@ -37,7 +37,7 @@ abstract class AbstractFileExporterTest extends AbstractExporterTest {
         $this->doExport(vfsStream::url('fail'));
     }
 
-    protected function doExport(?string $filePath = null) {
+    protected function doExport(?string $filePath = null): void {
         /** @var FileExporter $exporter */
         $exporter = $this->getExporter();
         if (isset($filePath)) {
