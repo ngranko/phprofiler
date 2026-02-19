@@ -6,6 +6,10 @@
     <testsuites>
         <testsuite name="PHProfiler Tests">
             <directory>Tests</directory>
+            <exclude>Tests/AbstractExporterTest.php</exclude>
+            <exclude>Tests/AbstractFileExporterTest.php</exclude>
+            <exclude>Tests/AbstractStringFileExporterTest.php</exclude>
+            <exclude>Tests/AbstractDomFileExporterTest.php</exclude>
         </testsuite>
     </testsuites>
     <source>
